@@ -19,6 +19,8 @@ class emjaibutton:
         self.label.pack()
 
     def leftClick(self,event):
+        self.item = event.widget
+        print (self.item.cget('bg'))
         print("left click")
         
     def rightClick(self,event):

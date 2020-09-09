@@ -3,19 +3,20 @@ from functools import partial
 
 class emjaibutton:
 
-    color = [["black","white"],["red","grey"],["orange","blue"],["red","white"],["black","white"],["black","white"]]
+    color = [["black","white"],["red","grey"],["orange","blue"],["red","green"],["teal","black"],["tan","indigo"]]
     def __init__(self,root):
         self.root = tk.Frame(root)
         self.root.pack()
 
         for i in range(6):
-            self.button = tk.Button(self.root, text = str("Button "+ str(i)))
+            self.button = tk.Button(self.root, text = str("Button "+ str(i)),fg=self.color[i][0],bg=self.color[i][1])
             
             self.button.bind("<Button-1>",self.leftClick)
             self.button.bind("<Button-3>",self.rightClick)
             self.button.pack()
         
-        self.label = tk.Label(self.root)
+        self.label = tk.Label(self.root,text="lorem ipsum" , bg="purple",fg="orange")
+        self.label.pack()
 
     def leftClick(self,event):
         print("left click")

@@ -8,23 +8,35 @@ class emjaibutton:
         self.root = tk.Frame(root)
         self.root.pack()
 
+        self.start = 2
+        self.cspan = 4
+        self.rspan = 2
+        self.padding = 5
+        self.row =  self.start
+        self.column = self.start
+        self.count = 0
         for i in range(6):
             self.button = tk.Button(self.root, text = str("Button "+ str(i)),fg=self.color[i][0],bg=self.color[i][1])
             
             self.button.bind("<Button-1>",self.leftClick)
             self.button.bind("<Button-3>",self.rightClick)
-            self.button.pack()
+            self.button.grid(row = self.row, column = self.column, columnspan = self.cspan, rowspan = self.rspan, pady = self.padding, padx = self.padding)
+            self.column += self.padding
+            self.count += 1
+            if (self.count%5==0):
+                self.row += self.padding
+                self.column = self.start
         
         self.label = tk.Label(self.root,text="lorem ipsum" , bg="purple",fg="orange")
-        self.label.pack()
+        self.label.grid(row = self.row, column = self.column + 5 * self.count, columnspan = 3, rowspan = 2, pady = (20, 5), padx = 5)
 
     def leftClick(self,event):
         self.item = event.widget
-        print (self.item.cget('bg'))
-        print("left click")
+        self.label.config(bg=self.item.cget('bg'))
         
     def rightClick(self,event):
-        print("right click")
+        self.item = event.widget
+        self.label.config(fg=self.item.cget('fg'))
 
         
 

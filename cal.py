@@ -2,25 +2,65 @@ from tkinter import*
 
 def btnClick(numbers):
     global operator
-    operator=operator + str(numbers)
+    operator=str(operator) + str(numbers)
     text_Input.set(operator)
 
 
 def btnDeleteDisplay():
     global operator
+    global decimal
     operator=""
     text_Input.set("")
+    decimal = False
 
 def btnEqualsInput():
     global operator
     sumup=str(eval(operator))
     text_Input.set(sumup)
     operator=""
+def convertDisplay():
+    global operator
+    global decimal
+    if decimal:
+        value = decToBin(int(operator))
+        text_Input.set(value)
+        operator = value
+        decimal = False
+    else:
+        value = binToDec(int(operator))
+        text_Input.set(value)
+        operator = value
+        decimal = True
 
-    
+def decToBin(dec):
+    bin = []
+    while dec > 0:
+        if dec % 2 == 1:
+            bin.insert(0,1)
+            dec -= 1
+            dec = int(dec - (dec/2))
+        elif dec % 2 == 0:
+            bin.insert(0,0)
+            dec = dec - (dec/2)
+    string = ""
+    for i in bin:
+        string += str(i)
+    bin = int(string)
+    return bin
+
+def binToDec(bin):
+    dec = 0
+    bin = [int(x) for x in str(bin)]
+    for i in range(len(bin)):
+        digit = bin.pop()
+        if digit == 1:
+            dec = dec + pow(2, i)
+    return dec
+ 
 cal = Tk()
-cal.title("Andre's Calculator")
+cal.title("Emjai's Calculator")
 operator=""
+decimal = True
 text_Input =StringVar()
 
 texDisplay = Entry(cal,font=('Algerian', 20,'bold'), textvariable=text_Input, bd=40, insertwidth=5,
@@ -60,6 +100,10 @@ Addition=Button(cal,padx=5,pady=5,bd=10, fg="Black", font=('Algerian', 30,'bold'
 btnEquals=Button(cal,padx=5,pady=5,bd=10, fg="Black", font=('Algerian', 30,'bold'),text="=",bg="white",command=btnEqualsInput).grid(row=4,column=2)
 
 btnDelete=Button(cal,padx=5,pady=5,bd=10, fg="Black", font=('Algerian', 30,'bold'),text="C",bg="white",command=btnDeleteDisplay).grid(row=4,column=3)
+
+#==========================================================================================================================
+
+btnConvertBin=Button(cal,padx=5,pady=5,bd=10, fg="Black", font=('Algerian', 20,'bold'),text="01\n10",bg="white",command=convertDisplay).grid(row=4,column=4)
 
 #==========================================================================================================================
 

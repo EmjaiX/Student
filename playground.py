@@ -19,7 +19,6 @@ def decToBin(dec):
 def binToDec(bin):
     dec = 0
     bin = [int(x) for x in str(bin)]
-    print(bin)
     for i in range(len(bin)):
         digit = bin.pop()
         if digit == 1:
@@ -27,4 +26,4 @@ def binToDec(bin):
     return dec
 
 print(decToBin(3))
-print(decToBin(8))
+print(binToDec(11))

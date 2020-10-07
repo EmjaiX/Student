@@ -5,7 +5,8 @@ def answer():
     mb.showerror("Answer", "Sorry, no answer available")
 
 def callback():
-    if mb.askyesno('Verify', 'Really quit?'):
+    answer = mb.askyesno('Verify', 'Really quit?')
+    if answer:
         mb.showwarning('Yes', 'Not yet implemented')
     else:
         mb.showinfo('No', 'Quit has been cancelled')

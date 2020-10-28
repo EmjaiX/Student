@@ -25,6 +25,10 @@ def insertRow(command,value):
     mydb.commit()
     print("1 record inserted, ID:", mycursor.lastrowid)
 
+def runQuery(query):
+    mycursor.execute(query)
+
+
 
 mydb = ql.connect(
   host="127.0.0.1",
@@ -37,20 +41,20 @@ mydb = ql.connect(
 mycursor = mydb.cursor()
 
 
-readTable("automobiles")
+readCell("automobiles",1)
 
-mycursor.execute("Select * from automobiles")
-
-
-
-myresult = mycursor.fetchall()
-
-for x in myresult:
-  print(x[1])
+# mycursor.execute("Select * from automobiles")
 
 
-sql = "INSERT INTO automobiles (MobileMake,MobileName,Transmission) VALUES (%s, %s, %s)"
-val = ("Cayeman:Porche:2000", "Fort","Standard")
 
-insertRow(sql, val)
+# myresult = mycursor.fetchall()
+
+# for x in myresult:
+#   print(x[1])
+
+
+# sql = "INSERT INTO automobiles (MobileMake,MobileName,Transmission) VALUES (%s, %s, %s)"
+# val = ("Cayeman:Porche:2000", "Fort","Standard")
+
+# insertRow(sql, val)
 

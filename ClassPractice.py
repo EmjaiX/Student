@@ -18,20 +18,12 @@ def readCell(TableName,cell):
     for x in myresult:
         print(x[cell])
 
-def insertRow(data):
-    
-    myresult = mycursor.fetchall()
+def insertRow(command,value):
 
-    for x in myresult:
-        print(x[1])
-
-
-    sql = "INSERT INTO automobiles (MobileName, MobileMake,Transmission) VALUES (%s, %s, %s)"
-    val = (data[0], data[1],data[2])
-
-    # mycursor.execute(sql, val)
+    mycursor.execute(command, value)
 
     mydb.commit()
+    print("1 record inserted, ID:", mycursor.lastrowid)
 
 
 mydb = ql.connect(
@@ -41,28 +33,24 @@ mydb = ql.connect(
   password="usbw",
   database="python"
 )
-print(mydb)
 
-# mycursor = mydb.cursor()
-
-
-# readTable("automobiles")
-
-# mycursor.execute("Select * from automobiles")
+mycursor = mydb.cursor()
 
 
+readTable("automobiles")
 
-# myresult = mycursor.fetchall()
-
-# for x in myresult:
-#   print(x[1])
+mycursor.execute("Select * from automobiles")
 
 
-# sql = "INSERT INTO automobiles (MobileName, MobileMake,Transmission) VALUES (%s, %s, %s)"
-# val = ("Teresita", "Mercialargo:Lamberghini:2018","Automatic")
 
-# mycursor.execute(sql, val)
+myresult = mycursor.fetchall()
 
-# mydb.commit()
+for x in myresult:
+  print(x[1])
 
-# print("1 record inserted, ID:", mycursor.lastrowid)
+
+sql = "INSERT INTO automobiles (MobileMake,MobileName,Transmission) VALUES (%s, %s, %s)"
+val = ("Cayeman:Porche:2000", "Fort","Standard")
+
+insertRow(sql, val)
+

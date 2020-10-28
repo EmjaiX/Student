@@ -29,22 +29,24 @@ def insertRow(data):
     sql = "INSERT INTO automobiles (MobileName, MobileMake,Transmission) VALUES (%s, %s, %s)"
     val = (data[0], data[1],data[2])
 
-    mycursor.execute(sql, val)
+    # mycursor.execute(sql, val)
 
     mydb.commit()
 
 
 mydb = ql.connect(
   host="127.0.0.1",
+  port="3306",
   user="root",
   password="usbw",
   database="python"
 )
+print(mydb)
 
-mycursor = mydb.cursor()
+# mycursor = mydb.cursor()
 
 
-readTable("automobiles")
+# readTable("automobiles")
 
 # mycursor.execute("Select * from automobiles")
 
